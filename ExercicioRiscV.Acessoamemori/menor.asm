@@ -6,18 +6,16 @@ vetor: .word 2,5,1
 .text
 main:
 	la a0, vetor
-	lw a1,0(a0)
-	add  a2,zero,a1
-	addi t0,zero,3 # T0 GUARDA O TAMANHO DO VETOR
+	lw t0,0(a0)
+	add  a2,zero,t0
+	addi a1,zero,3 # T0 GUARDA O TAMANHO DO VETOR
 	addi t1, zero,0
-	addi t3, zero,1
 	j procurar
 	
 procurar:
-	beq t1,t0, fim
-	lw a1, (a0)
-	slt t2, a1,a2
-	beq t2,t3,menor
+	beq t1,a1, fim
+	lw t0, (a0)
+	bge a2,t0,menor
 	j incrementa
 
 incrementa:
@@ -26,13 +24,13 @@ incrementa:
 	j procurar
 	
 menor:
-	add a2,zero, a1
+	add a2,zero, t0
 	add s0,zero, t1,  #indice 
 	j incrementa
 	
 fim:
 	add a1, zero,a2
-	add a3, zero, s0
+	add a0, zero,s0
 	nop 
 	ebreak
 	

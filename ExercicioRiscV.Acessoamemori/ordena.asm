@@ -1,6 +1,6 @@
 .data
 
-vetor: .word 1,-2, 4, 5, -7
+vetor: .word 1,3,-2,-1,0
 
 .text
 main:
@@ -12,14 +12,13 @@ main:
 	addi t4,zero,5 # T4 GUARDA O TAMANHO DO VETOR
 	addi t1, zero,0 #se altera na primeira função
 	addi t6,zero,0
-	addi t3, zero,1
+	addi s2,zero,0
 	j ordena
 	
 procurar:
 	beq t1,t0, fim
 	lw a1, (a0)
-	slt t2, a1,a2
-	beq t2,t3,menor
+	bge a2,a1,menor
 	j incrementa
 
 incrementa:
@@ -33,15 +32,14 @@ menor:
 	j incrementa
 	
 fim:
-	add a1, zero,a2
-	add a3, zero, s0
+	add t1,zero,zero
 	ret
 swap:
 	slli a4,a4,2
-	add a4,a4,a0
+	add a4,a4,t5
 	lw s10, (a4)
 	slli a5,a5,2
-	add a5,a5,a0
+	add a5,a5,t5
 	lw s11,(a5)
 	sw s10, (a5)
 	sw s11, (a4)
@@ -49,16 +47,25 @@ swap:
 
 ordena:
 	beq t4,t6, termina
+	add a3,zero,a0
 	jal procurar
-	lw a4, (t5)
-	add a5, zero, a3
-	jal swap
+	bne s0, zero,chamaSwap 
+	j incrementa2
+	
+chamaSwap:
+	add a4,zero,s2
+	add a5, zero, s0
+	j swap
 	
 incrementa2:
 	
 	addi t6,t6,1 #incrementa o for de ordena
 	addi t5,t5,4
-		
+	add a0,zero,a3	
+	addi a0,a0,4
+	lw a1,(a0)
+	add  a2,zero,a1
+	addi t0,t0, -1
 	j ordena
 	
 termina:
