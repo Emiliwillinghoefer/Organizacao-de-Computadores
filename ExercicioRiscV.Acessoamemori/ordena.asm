@@ -6,9 +6,9 @@ vetor: .word 1,3,-2,-1,0
 main:
 	la t5, vetor #vetor imutavel
 	la a0, vetor
-	lw a1,0(a0)
-	add  a2,zero,a1
-	addi t0,zero,5 # T0 GUARDA O TAMANHO DO VETOR
+	lw s9,0(a0)
+	add  a2,zero,s9
+	addi a1,zero,5 # a1 GUARDA O TAMANHO DO VETOR
 	addi t4,zero,5 # T4 GUARDA O TAMANHO DO VETOR
 	addi t1, zero,0 #se altera na primeira função
 	addi t6,zero,0
@@ -16,9 +16,9 @@ main:
 	j ordena
 	
 procurar:
-	beq t1,t0, fim
-	lw a1, (a0)
-	bge a2,a1,menor
+	beq t1,a1, fim
+	lw s9, (a0)
+	bge a2,s9,menor
 	j incrementa
 
 incrementa:
@@ -27,7 +27,7 @@ incrementa:
 	j procurar
 	
 menor:
-	add a2,zero, a1
+	add a2,zero, s9
 	add s0,zero, t1,  #indice 
 	j incrementa
 	
@@ -63,9 +63,9 @@ incrementa2:
 	addi t5,t5,4
 	add a0,zero,a3	
 	addi a0,a0,4
-	lw a1,(a0)
-	add  a2,zero,a1
-	addi t0,t0, -1
+	lw s9,(a0)
+	add  a2,zero,s9
+	addi a1,a1, -1
 	j ordena
 	
 termina:
