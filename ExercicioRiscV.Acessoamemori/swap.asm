@@ -13,10 +13,10 @@ main:
 
 swap:
 	slli a2,a2,2
-	add a2,a2,a1
+	add a2,a2,a0
 	lw t0, (a2)
 	slli a3,a3,2
-	add a3,a3,a1
+	add a3,a3,a0
 	lw t1,(a3)
 	sw t0, (a3)
 	sw t1, (a2)
